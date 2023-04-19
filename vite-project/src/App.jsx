@@ -14,6 +14,17 @@ function App() {
     setValue("");
   };
 
+  const handleCheckboxChange = (id) => {
+    setArray((prevState) =>
+      prevState.map((item) => {
+        if (item.id === id) {
+          return { ...item, completed: true };
+        }
+        return item;
+      })
+    );
+  };
+
   console.log(array);
   return (
     <>
@@ -37,7 +48,11 @@ function App() {
         {array.map((item) => (
           <li key={item.id}>
             <label>
-              <input type="checkbox" checked={item.completed} />
+              <input
+                type="checkbox"
+                checked={item.completed}
+                onChange={() => handleCheckboxChange(item.id)}
+              />
               {item.title}
             </label>
             <button
