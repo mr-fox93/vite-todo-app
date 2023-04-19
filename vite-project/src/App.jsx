@@ -18,7 +18,7 @@ function App() {
     setArray((prevState) =>
       prevState.map((item) => {
         if (item.id === id) {
-          return { ...item, completed: true };
+          return { ...item, completed: !item.completed };
         }
         return item;
       })
@@ -43,6 +43,7 @@ function App() {
           <button className="btn">ADD</button>
         </div>
       </form>
+
       <span>To do list:</span>
       <ul className="list">
         {array.map((item) => (
@@ -53,7 +54,13 @@ function App() {
                 checked={item.completed}
                 onChange={() => handleCheckboxChange(item.id)}
               />
-              {item.title}
+              <span>
+                {item.completed === true ? (
+                  <strike> {item.title}</strike>
+                ) : (
+                  <span>{item.title}</span>
+                )}
+              </span>
             </label>
             <button
               className="btn-danger"
@@ -66,6 +73,14 @@ function App() {
           </li>
         ))}
       </ul>
+      <button
+        onClick={() => {
+          setArray([]);
+        }}
+        className="btn"
+      >
+        CLEAR
+      </button>
     </>
   );
 }
