@@ -1,0 +1,33 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group > input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.form-group > button {
+  margin-bottom: 25px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.btn-danger {
+  background: transparent;
+  border: 1px solid red;
+  color: red;
+  margin-left: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
