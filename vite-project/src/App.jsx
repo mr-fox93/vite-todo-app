@@ -1,9 +1,16 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [array, setArray] = useState([]);
+  const [array, setArray] = useState(() => {
+    const saved = localStorage.getItem("ITEMS");
+    return saved === null ? [] : JSON.parse(saved);
+  });
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(array));
+  }, [array]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -30,7 +37,7 @@ function App() {
     <>
       <form className="newForm" onSubmit={handleClick}>
         <div className="form-group">
-          <label htmlFor="item">Add item</label>
+          <label htmlFor="item">mr-fox93</label>
           <input
             value={value}
             onChange={(e) => {
@@ -44,7 +51,11 @@ function App() {
         </div>
       </form>
 
-      <span>To do list:</span>
+      <span>
+        {array.length === 0
+          ? "Nothing to do 😞, please add something."
+          : "To do list:"}
+      </span>
       <ul className="list">
         {array.map((item) => (
           <li key={item.id}>
@@ -56,7 +67,7 @@ function App() {
               />
               <span>
                 {item.completed === true ? (
-                  <strike> {item.title}</strike>
+                  <strike>{item.title}</strike>
                 ) : (
                   <span>{item.title}</span>
                 )}
